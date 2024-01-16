@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2t123e3yv46m"]
+
+[ext_resource type="Texture2D" uid="uid://bw1qeu50yjfwb" path="res://Scenes/Grid/MistGrid/Assets/Ground.png" id="1_ckldx"]
+[ext_resource type="Script" path="res://Scenes/Grid/MistGrid/MistyGrid.cs" id="1_fupop"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y2yht"]
+size = Vector2(192, 192)
+
+[node name="MistyGrid" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_fupop")
+
+[node name="Ground" type="Sprite2D" parent="."]
+texture = ExtResource("1_ckldx")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 200
+lifetime = 15.93
+randomness = 0.42
+emission_shape = 3
+emission_rect_extents = Vector2(96, 96)
+gravity = Vector2(0, 0)
+damping_max = 100.0
+scale_amount_min = 4.98
+scale_amount_max = 14.93
+color = Color(0.478431, 0.478431, 0.478431, 0.431373)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y2yht")
+
+[node name="MonsterSpawner" type="Node2D" parent="."]

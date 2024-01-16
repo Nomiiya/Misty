@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://1iu3vt07xjxq"]
+
+[ext_resource type="Script" path="res://Scenes/Grid/BaseGrid.cs" id="1_h72bt"]
+
+[node name="BaseGrid" type="Node2D"]
+script = ExtResource("1_h72bt")
+
+[node name="Tiles" type="Node2D" parent="."]

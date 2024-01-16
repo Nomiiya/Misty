@@ -13,8 +13,49 @@ config_version=5
 config/name="Misty"
 run/main_scene="res://Scenes/Main/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+
+[autoload]
+
+BuildingGlobals="*res://Singletons/building_globals.cs"
+GameSettings="*res://Singletons/game_settings.cs"
+SessionData="*res://Singletons/session_data.cs"
+SignalsManager="*res://Singletons/signals_manager.cs"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/scale=2.0
 
 [dotnet]
 
 project/assembly_name="Misty"
+
+[input]
+
+open_build_menu={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":69,"echo":false,"script":null)
+]
+}
+movement={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="playerTilePickArea"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="enemyRange"
+2d_physics/layer_5="buildingTile"
+2d_physics/layer_6="emptyTile"
+2d_physics/layer_7="AttackRange"
+2d_physics/layer_8="BuildingAttackProjectile"

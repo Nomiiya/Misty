@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4gwgchggruqc"]
+
+[ext_resource type="Texture2D" uid="uid://cr256qs3iio0x" path="res://Assets/Testing/player.png" id="1_8ybjl"]
+[ext_resource type="Script" path="res://Scenes/Player/Player.cs" id="1_acl64"]
+[ext_resource type="PackedScene" uid="uid://c48x06b8x1aqr" path="res://Scenes/UI/BuildingMenu/BuildingMenu.tscn" id="3_byyop"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ma04l"]
+size = Vector2(25, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4m3ae"]
+size = Vector2(20, 7)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_acl64")
+metadata/Player = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_ma04l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8ybjl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TilePicker" type="Area2D" parent="."]
+position = Vector2(1, 7)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TilePicker"]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_4m3ae")
+
+[node name="BuildingMenu" parent="." instance=ExtResource("3_byyop")]
+visible = false

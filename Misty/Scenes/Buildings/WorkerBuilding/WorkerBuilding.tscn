@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkhvulcrws1bc"]
+
+[ext_resource type="Texture2D" uid="uid://iovi0gynn3l7" path="res://Assets/Testing/WorkerBuilding.png" id="1_4ql6h"]
+[ext_resource type="Script" path="res://Scenes/Buildings/WorkerBuilding/WorkerBuilding.cs" id="2_2sx6n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4g54"]
+
+[node name="WorkerBuilding" type="StaticBody2D" groups=["Building", "EnemyAttackable"]]
+scale = Vector2(2, 2)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2_2sx6n")
+metadata/worker = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4ql6h")
+
+[node name="HP" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.5
+offset_top = -10.0
+offset_right = 13.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.602959, 0.339548)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.6, 1.6)
+shape = SubResource("RectangleShape2D_w4g54")

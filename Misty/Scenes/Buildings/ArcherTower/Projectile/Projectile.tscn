@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddrnhrodtdpie"]
+
+[ext_resource type="Script" path="res://Scenes/Buildings/ArcherTower/Projectile/Projectile.cs" id="1_8hn4o"]
+[ext_resource type="Texture2D" uid="uid://2sp4b4u50afk" path="res://Assets/Testing/Buildings/projectile.png" id="1_g8d4j"]
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_ums0m"]
+length = 16.0
+
+[node name="Projectile" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_8hn4o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_g8d4j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, -1)
+rotation = -1.56948
+scale = Vector2(1, 1)
+shape = SubResource("SeparationRayShape2D_ums0m")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-6, -1)
+rotation = -1.56948
+scale = Vector2(1, 1)
+shape = SubResource("SeparationRayShape2D_ums0m")
+
+[connection signal="body_entered" from="HitBox" to="." method="OnHitBoxEntered"]

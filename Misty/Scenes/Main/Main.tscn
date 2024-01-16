@@ -1,3 +1,81 @@
-[gd_scene format=3 uid="uid://cawqeuxva6ep2"]
+[gd_scene load_steps=8 format=3 uid="uid://cawqeuxva6ep2"]
+
+[ext_resource type="Script" path="res://Scenes/Main/Main.cs" id="1_t15wa"]
+[ext_resource type="PackedScene" uid="uid://wu3rc0tromtx" path="res://Scenes/Utilities/GameManager.tscn" id="2_ge2a5"]
+[ext_resource type="PackedScene" uid="uid://d4gwgchggruqc" path="res://Scenes/Player/Player.tscn" id="3_205ms"]
+[ext_resource type="PackedScene" uid="uid://dyvptavu7qxep" path="res://Scenes/Grid/BaseTile.tscn" id="3_wk7q4"]
+[ext_resource type="PackedScene" uid="uid://n0u51f77kfmf" path="res://Scenes/Buildings/LuminiteMine/LuminiteMine.tscn" id="4_huw4c"]
+[ext_resource type="PackedScene" uid="uid://bhw1g5qvln1bk" path="res://Scenes/Enemies/Zombie/Zombie.tscn" id="5_yq4g7"]
+[ext_resource type="PackedScene" uid="uid://d2t123e3yv46m" path="res://Scenes/Grid/MistGrid/MistyGrid.tscn" id="6_t4h4u"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_t15wa")
+
+[node name="MistyGrids" type="Node" parent="."]
+
+[node name="MistyGrid" parent="MistyGrids" instance=ExtResource("6_t4h4u")]
+position = Vector2(192, 0)
+
+[node name="MistyGrid2" parent="MistyGrids" instance=ExtResource("6_t4h4u")]
+position = Vector2(192, 192)
+
+[node name="MistyGrid3" parent="MistyGrids" instance=ExtResource("6_t4h4u")]
+position = Vector2(0, 192)
+
+[node name="MistyGrid4" parent="MistyGrids" instance=ExtResource("6_t4h4u")]
+position = Vector2(-192, 192)
+
+[node name="MistyGrid5" parent="MistyGrids" instance=ExtResource("6_t4h4u")]
+position = Vector2(-192, 0)
+
+[node name="MistyGrid6" parent="MistyGrids" instance=ExtResource("6_t4h4u")]
+position = Vector2(-192, -192)
+
+[node name="MistyGrid7" parent="MistyGrids" instance=ExtResource("6_t4h4u")]
+position = Vector2(0, -192)
+
+[node name="MistyGrid8" parent="MistyGrids" instance=ExtResource("6_t4h4u")]
+position = Vector2(192, -192)
+
+[node name="GameManager" parent="." instance=ExtResource("2_ge2a5")]
+
+[node name="LuminiteMine" parent="." instance=ExtResource("4_huw4c")]
+
+[node name="BaseMineGrid" type="Node2D" parent="."]
+
+[node name="BaseTile" parent="BaseMineGrid" instance=ExtResource("3_wk7q4")]
+position = Vector2(0, -64)
+
+[node name="BaseTile2" parent="BaseMineGrid" instance=ExtResource("3_wk7q4")]
+position = Vector2(-64, -64)
+
+[node name="BaseTile3" parent="BaseMineGrid" instance=ExtResource("3_wk7q4")]
+position = Vector2(-64, 0)
+
+[node name="BaseTile4" parent="BaseMineGrid" instance=ExtResource("3_wk7q4")]
+position = Vector2(64, -64)
+
+[node name="BaseTile5" parent="BaseMineGrid" instance=ExtResource("3_wk7q4")]
+position = Vector2(64, 0)
+
+[node name="BaseTile6" parent="BaseMineGrid" instance=ExtResource("3_wk7q4")]
+position = Vector2(-64, 64)
+
+[node name="BaseTile7" parent="BaseMineGrid" instance=ExtResource("3_wk7q4")]
+position = Vector2(0, 64)
+
+[node name="BaseTile8" parent="BaseMineGrid" instance=ExtResource("3_wk7q4")]
+position = Vector2(64, 64)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Zombie2" parent="Enemies" instance=ExtResource("5_yq4g7")]
+position = Vector2(577, 344)
+
+[node name="Player" parent="." instance=ExtResource("3_205ms")]
+z_index = 1
+position = Vector2(48, -14)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

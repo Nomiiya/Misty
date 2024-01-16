@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://c08e375qql6p7"]
+
+[ext_resource type="Texture2D" uid="uid://cmueh0usqhllp" path="res://Assets/Testing/Buildings/BaseBuildingaseprite.png" id="1_7icnl"]
+[ext_resource type="Script" path="res://Scenes/Buildings/ArcherTower/ArcherTower.cs" id="1_kg4nq"]
+[ext_resource type="Texture2D" uid="uid://kp5b0f5ksq2d" path="res://Assets/Testing/Buildings/Tower.png" id="2_xm284"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43vov"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ci0td"]
+radius = 106.019
+
+[node name="ArcherTower" type="StaticBody2D" groups=["Archer", "EnemyAttackable"]]
+scale = Vector2(2, 2)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_kg4nq")
+
+[node name="Floor" type="Sprite2D" parent="."]
+texture = ExtResource("1_7icnl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_43vov")
+
+[node name="Tower" type="Sprite2D" parent="."]
+texture = ExtResource("2_xm284")
+
+[node name="AttackRange" type="Area2D" parent="."]
+visible = false
+collision_layer = 64
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+shape = SubResource("CircleShape2D_ci0td")
+
+[node name="HP" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -2.0
+offset_right = 21.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="shootDelay" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="AttackRange" to="." method="OnEnteredAttackRange"]
+[connection signal="body_exited" from="AttackRange" to="." method="OnExitedAttackRange"]
