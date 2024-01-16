@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmydbh51b2jqx"]
+
+[ext_resource type="Texture2D" uid="uid://dujgpem8eur3v" path="res://Scenes/Grid/LuminiteCave/LuminiteCave.png" id="1_mfv10"]
+[ext_resource type="Texture2D" uid="uid://bvd0al11nrera" path="res://Scenes/Grid/LuminiteCave/Assets/Workers.png" id="2_w3rgf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hjqnb"]
+size = Vector2(192, 192)
+
+[sub_resource type="Curve2D" id="Curve2D_rq6ir"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 13, 12, 0, 0, 0, 0, 11, 85, 0, 0, 0, 0, 46, 82, 0, 0, 0, 0, 48, 12, 0, 0, 0, 0, 12, 12)
+}
+point_count = 5
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sqvn4"]
+radius = 4.99813
+height = 9.99625
+
+[node name="LuminiteGrid" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mfv10")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_hjqnb")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Node2D"]
+position = Vector2(-32, 0)
+curve = SubResource("Curve2D_rq6ir")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Node2D/Path2D"]
+position = Vector2(13, 12)
+rotation = 1.59819
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Node2D/Path2D/PathFollow2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Path2D/PathFollow2D/CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_sqvn4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Path2D/PathFollow2D/CharacterBody2D"]
+texture = ExtResource("2_w3rgf")
