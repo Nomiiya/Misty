@@ -4,3 +4,7 @@
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_6cs7g")
+
+[node name="luminiteGatherDelay" type="Timer" parent="."]
+one_shot = true
+autostart = true

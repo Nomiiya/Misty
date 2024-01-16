@@ -1,26 +1,37 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class Player : CharacterBody2D
 {
 	game_settings gameSettings;
 	building_globals buildingGlobals;
+	session_data snData;
 	public float speed {get; set;} = 500;
 
 	KinematicCollision2D collision2D;
+
+	// Child Nodes
+	Label currentLuminite;
+	Label luminiteGatherRate;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		gameSettings = GetNode<game_settings>("/root/GameSettings");
 		buildingGlobals = GetNode<building_globals>("/root/BuildingGlobals");
+		snData = GetNode<session_data>("/root/SessionData");
+
+		// Children
+		currentLuminite = GetNode<Label>("HUD/LuminiteCount");
+		luminiteGatherRate = GetNode<Label>("HUD/LiminiteRate");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	 public override void _Process(double delta)
     {
 		Movement_Check(delta);
-		
+		UpdateHUD();
     }
 
 	public void Movement_Check(double delta) {
@@ -45,7 +56,6 @@ public partial class Player : CharacterBody2D
 
     public override void _Input(InputEvent @event)
     {
-
 		// "B" Keyboard Button
         if(Input.IsActionPressed("open_build_menu")){
 			if(buildingGlobals.selectedTilePath == null) 
@@ -66,5 +76,16 @@ public partial class Player : CharacterBody2D
 				
 			}
 		}
+
+		// Wave Start -- TESTING
+		if(Input.IsActionPressed("WaveStart")){
+			gameSettings.EmitSignal("WaveStart", 10);
+		}
     }
+
+	// Utilities / Update Methods
+	public void UpdateHUD(){
+		currentLuminite.Text = "Current Luminite: " + snData.CurrentLuminiteCrystals.ToString();
+		luminiteGatherRate.Text = "Gather Rate: " + snData.LuminiteRate.ToString();
+	}
 }

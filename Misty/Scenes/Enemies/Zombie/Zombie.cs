@@ -71,6 +71,9 @@ public partial class Zombie : CharacterBody2D
         if(body.IsInGroup("LuminiteMine")){
             GetNode<LuminiteMine>(body.GetPath()).DamageTaken(damage);
         }
+        if(body.IsInGroup("Archer")){
+            GetNode<ArcherTower>(body.GetPath()).DamageTaken(damage);
+        }
     }
 
 

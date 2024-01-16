@@ -34,3 +34,22 @@ shape = SubResource("RectangleShape2D_4m3ae")
 
 [node name="BuildingMenu" parent="." instance=ExtResource("3_byyop")]
 visible = false
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="LuminiteCount" type="Label" parent="HUD"]
+offset_left = -316.0
+offset_top = -176.0
+offset_right = -276.0
+offset_bottom = -153.0
+text = "Test
+"
+
+[node name="LiminiteRate" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = -312.0
+offset_top = -140.0
+offset_right = -272.0
+offset_bottom = -117.0

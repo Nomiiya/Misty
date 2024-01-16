@@ -17,7 +17,6 @@ texture = ExtResource("1_g8d4j")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-6, -1)
 rotation = -1.56948
-scale = Vector2(1, 1)
 shape = SubResource("SeparationRayShape2D_ums0m")
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -27,7 +26,6 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(-6, -1)
 rotation = -1.56948
-scale = Vector2(1, 1)
 shape = SubResource("SeparationRayShape2D_ums0m")
 
 [connection signal="body_entered" from="HitBox" to="." method="OnHitBoxEntered"]
