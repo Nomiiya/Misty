@@ -13,6 +13,17 @@ offset_right = 64.0
 offset_bottom = 32.0
 script = ExtResource("1_ap38y")
 
+[node name="CostLabel" type="Label" parent="."]
+visible = false
+layout_mode = 2
+offset_top = -23.0
+offset_right = 164.0
+text = "Not Enough Luminite"
+
+[node name="DisplayTimer" type="Timer" parent="CostLabel"]
+one_shot = true
+autostart = true
+
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
