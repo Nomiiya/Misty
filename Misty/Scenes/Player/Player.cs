@@ -25,6 +25,7 @@ public partial class Player : CharacterBody2D
 		// Children
 		currentLuminite = GetNode<Label>("HUD/LuminiteCount");
 		luminiteGatherRate = GetNode<Label>("HUD/LiminiteRate");
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,7 +57,7 @@ public partial class Player : CharacterBody2D
 
     public override void _Input(InputEvent @event)
     {
-		// "B" Keyboard Button
+		// "E" Keyboard Button
         if(Input.IsActionPressed("open_build_menu")){
 			if(buildingGlobals.selectedTilePath == null) 
 			{
@@ -73,7 +74,6 @@ public partial class Player : CharacterBody2D
 				// Pause Keyboard inputs but NOT the game
 				gameSettings.InputPaused = true;
 				GetNode<Control>("BuildingMenu").Visible = true;
-				
 			}
 		}
 
@@ -82,6 +82,7 @@ public partial class Player : CharacterBody2D
 			gameSettings.EmitSignal("WaveStart", 10);
 		}
     }
+
 
 	// Utilities / Update Methods
 	public void UpdateHUD(){

@@ -74,7 +74,7 @@ position = Vector2(577, 344)
 
 [node name="Player" parent="." instance=ExtResource("3_205ms")]
 z_index = 1
-position = Vector2(48, -14)
+position = Vector2(7, -1)
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
