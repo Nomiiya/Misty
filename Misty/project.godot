@@ -27,7 +27,6 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/resizable=false
 window/stretch/mode="viewport"
-window/stretch/scale=2.0
 
 [dotnet]
 
@@ -57,7 +56,7 @@ WaveStart={
 [layer_names]
 
 2d_physics/layer_1="player"
-2d_physics/layer_2="playerTilePickArea"
+2d_physics/layer_2="Terrain"
 2d_physics/layer_3="enemy"
 2d_physics/layer_4="enemyRange"
 2d_physics/layer_5="buildingTile"
