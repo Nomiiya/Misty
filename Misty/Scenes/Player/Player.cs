@@ -9,6 +9,11 @@ public partial class Player : CharacterBody2D
 	session_data snData;
 	public float speed {get; set;} = 500;
 
+	// Tile map to check tiles for what type they are
+	TileMap terrain;
+	TileData selectedTile;
+	Godot.Vector2I selectedTileCoords;
+
 	KinematicCollision2D collision2D;
 
 	// Child Nodes
@@ -21,6 +26,11 @@ public partial class Player : CharacterBody2D
 		gameSettings = GetNode<game_settings>("/root/GameSettings");
 		buildingGlobals = GetNode<building_globals>("/root/BuildingGlobals");
 		snData = GetNode<session_data>("/root/SessionData");
+
+		// Tile maps
+		terrain = GetNode<TileMap>("/root/Main/Terrains");
+		selectedTile = null;
+		selectedTileCoords = new Godot.Vector2I(0,0);
 
 		// Children
 		currentLuminite = GetNode<Label>("HUD/LuminiteCount");
@@ -77,12 +87,45 @@ public partial class Player : CharacterBody2D
 			}
 		}
 
+		if(Input.IsActionPressed("BuyTile")){
+			if(selectedTile == null){ return; }
+			terrain.SetCell(0, selectedTile)
+		}
+
+		/* TESTING BUTTTON*/
+
 		// Wave Start -- TESTING
 		if(Input.IsActionPressed("WaveStart")){
 			gameSettings.EmitSignal("WaveStart", 10);
 		}
     }
 
+	//  
+	public void OnTileCheckerEntered(Rid body_rid, Node2D body, int body_shape_index, int local_shape_index){
+		Vector2I coords = terrain.GetCoordsForBodyRid(body_rid);
+		Godot.Collections.Array<Godot.Vector2I> neighbors = new Godot.Collections.Array<Vector2I>{
+			terrain.GetNeighborCell(coords, TileSet.CellNeighbor.RightSide),
+			terrain.GetNeighborCell(coords, TileSet.CellNeighbor.TopSide),
+			terrain.GetNeighborCell(coords, TileSet.CellNeighbor.LeftSide),
+			terrain.GetNeighborCell(coords, TileSet.CellNeighbor.BottomSide),
+		};
+		TileData tile = terrain.GetCellTileData(0, coords);
+		selectedTile = tile;
+
+		
+		foreach(Godot.Vector2I neighbor in neighbors){
+			if((bool)terrain.GetCellTileData(0,neighbor).GetCustomData("bought") == true){
+				GetNode<Label>("HUD/Buy").Visible = true;
+				GetNode<Label>("HUD/Buy").Text = "Buyable for : " + tile.GetCustomData("cost").ToString();
+			};
+		}
+	}
+
+	public void OnTileCheckerExited(Rid body_rid, Node2D body, int body_shape_index, int local_shape_index){
+		selectedTile = null;
+		selectedTileCoords = new Godot.Vector2I(0,0);
+		GetNode<Label>("HUD/Buy").Visible = false;
+	}
 
 	// Utilities / Update Methods
 	public void UpdateHUD(){
