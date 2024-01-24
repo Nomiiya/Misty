@@ -27,7 +27,7 @@ public partial class BaseTile : Sprite2D
 			return;
 		}
 		Texture = GD.Load<Texture2D>("res://Assets/Testing/tileSelect.png");
-		buildingGlobals.selectedTilePath = this.GetPath();
+		buildingGlobals.selectedBuildableTilePath = this.GetPath();
 		
 	}
 
@@ -36,6 +36,6 @@ public partial class BaseTile : Sprite2D
         IsPlayerOnTile = false;
     }
 		Texture = GD.Load<Texture2D>("res://Assets/Testing/tile.png");
-		buildingGlobals.selectedTilePath = null;
+		buildingGlobals.selectedBuildableTilePath = null;
 	}
 }

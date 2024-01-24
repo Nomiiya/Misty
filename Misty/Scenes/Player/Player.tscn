@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4gwgchggruqc"]
+[gd_scene load_steps=8 format=3 uid="uid://d4gwgchggruqc"]
 
 [ext_resource type="Texture2D" uid="uid://cr256qs3iio0x" path="res://Assets/Testing/player.png" id="1_8ybjl"]
 [ext_resource type="Script" path="res://Scenes/Player/Player.cs" id="1_acl64"]
@@ -11,6 +11,10 @@ size = Vector2(25, 35)
 size = Vector2(20, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eq346"]
+size = Vector2(33, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b02gx"]
+size = Vector2(20, 48)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 3072
@@ -18,6 +22,7 @@ script = ExtResource("1_acl64")
 metadata/Player = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_ma04l")
 
@@ -29,7 +34,7 @@ texture = ExtResource("1_8ybjl")
 [node name="TilePicker" type="Area2D" parent="."]
 position = Vector2(1, 7)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TilePicker"]
 position = Vector2(0, 6.5)
@@ -67,12 +72,24 @@ offset_right = 21.0
 offset_bottom = -17.0
 
 [node name="TileChecker" type="Area2D" parent="."]
+visible = false
 collision_layer = 2048
 collision_mask = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileChecker"]
-position = Vector2(-22, -1)
+position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_eq346")
+
+[node name="TopDownChecker" type="Area2D" parent="."]
+visible = false
+collision_layer = 2048
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopDownChecker"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_b02gx")
 
 [connection signal="body_shape_entered" from="TileChecker" to="." method="OnTileCheckerEntered"]
 [connection signal="body_shape_exited" from="TileChecker" to="." method="OnTileCheckerExited"]
+[connection signal="body_shape_entered" from="TopDownChecker" to="." method="OnTileCheckerEntered"]
+[connection signal="body_shape_exited" from="TopDownChecker" to="." method="OnTileCheckerExited"]

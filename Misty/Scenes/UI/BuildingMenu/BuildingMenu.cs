@@ -43,15 +43,15 @@ public partial class BuildingMenu : Control
 		snData.CurrentLuminiteCrystals -= ArcherBuildingCost;
 		// Replace the empty tile with the Building on Button One
 		ArcherTower	building = (ArcherTower)archerBuilding.Instantiate();
-		building.GlobalPosition = GetNode<BaseTile>(bg.selectedTilePath).GlobalPosition;
-		GetNode<BaseTile>(bg.selectedTilePath).GetParent().AddChild(building);
+		building.GlobalPosition = GetNode<BaseTile>(bg.selectedBuildableTilePath).GlobalPosition;
+		GetNode<BaseTile>(bg.selectedBuildableTilePath).GetParent().AddChild(building);
 		//	Free the current node 
-		GetNode<BaseTile>(bg.selectedTilePath).QueueFree();
+		GetNode<BaseTile>(bg.selectedBuildableTilePath).QueueFree();
 
 		// Hide the menu and unpause movement
 		Visible = false;
 		gameSettings.InputPaused = false; 
-		bg.selectedTilePath = null;
+		bg.selectedBuildableTilePath = null;
 	}
 	public void OnButtonTwoPressed(){
 		session_data snData = GetNode<session_data>("/root/SessionData");
@@ -64,14 +64,14 @@ public partial class BuildingMenu : Control
 		snData.CurrentLuminiteCrystals -= WorkerBuildingCost;
 		// Replace the empty tile with the Building on Button One
 		WorkerBuilding	building = (WorkerBuilding)workerBuilding.Instantiate();
-		building.GlobalPosition = GetNode<BaseTile>(bg.selectedTilePath).GlobalPosition;
-		GetNode<BaseTile>(bg.selectedTilePath).GetParent().AddChild(building);
+		building.GlobalPosition = GetNode<BaseTile>(bg.selectedBuildableTilePath).GlobalPosition;
+		GetNode<BaseTile>(bg.selectedBuildableTilePath).GetParent().AddChild(building);
 		//	Free the current node 
-		GetNode<BaseTile>(bg.selectedTilePath).QueueFree();
+		GetNode<BaseTile>(bg.selectedBuildableTilePath).QueueFree();
 		// Hide the menu and unpause movement
 		Visible = false;
 		gameSettings.InputPaused = false; 
-		bg.selectedTilePath = null;
+		bg.selectedBuildableTilePath = null;
 		
 	}
 

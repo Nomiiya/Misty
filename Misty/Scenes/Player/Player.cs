@@ -11,8 +11,8 @@ public partial class Player : CharacterBody2D
 
 	// Tile map to check tiles for what type they are
 	TileMap terrain;
-	TileData selectedTile;
-	Godot.Vector2I selectedTileCoords;
+	TileData buyableCell;
+	Godot.Vector2I buyableCellCoords;
 
 	KinematicCollision2D collision2D;
 
@@ -29,8 +29,8 @@ public partial class Player : CharacterBody2D
 
 		// Tile maps
 		terrain = GetNode<TileMap>("/root/Main/Terrains");
-		selectedTile = null;
-		selectedTileCoords = new Godot.Vector2I(0,0);
+		buyableCell = null;
+		buyableCellCoords = new Godot.Vector2I(0,0);
 
 		// Children
 		currentLuminite = GetNode<Label>("HUD/LuminiteCount");
@@ -69,7 +69,7 @@ public partial class Player : CharacterBody2D
     {
 		// "E" Keyboard Button
         if(Input.IsActionPressed("open_build_menu")){
-			if(buildingGlobals.selectedTilePath == null) 
+			if(buildingGlobals.selectedBuildableTilePath == null) 
 			{
 				return;
 			}
@@ -88,8 +88,13 @@ public partial class Player : CharacterBody2D
 		}
 
 		if(Input.IsActionPressed("BuyTile")){
-			if(selectedTile == null){ return; }
-			terrain.SetCell(0, selectedTile)
+			if(buyableCell == null){ return; }
+			
+			terrain.SetCell(0, buyableCellCoords,0, new Godot.Vector2I(2,1));
+			snData.CurrentLuminiteCrystals -= (int)buyableCell.GetCustomData("cost");
+
+			buyableCell = null;
+			buyableCellCoords =new Godot.Vector2I(0,0);
 		}
 
 		/* TESTING BUTTTON*/
@@ -110,7 +115,8 @@ public partial class Player : CharacterBody2D
 			terrain.GetNeighborCell(coords, TileSet.CellNeighbor.BottomSide),
 		};
 		TileData tile = terrain.GetCellTileData(0, coords);
-		selectedTile = tile;
+		buyableCell = tile;
+		buyableCellCoords = coords;
 
 		
 		foreach(Godot.Vector2I neighbor in neighbors){
@@ -119,11 +125,12 @@ public partial class Player : CharacterBody2D
 				GetNode<Label>("HUD/Buy").Text = "Buyable for : " + tile.GetCustomData("cost").ToString();
 			};
 		}
+		// terrain.SetCell(0, buyableCellCoords, 0, new Godot.Vector2I(0,0));
 	}
 
 	public void OnTileCheckerExited(Rid body_rid, Node2D body, int body_shape_index, int local_shape_index){
-		selectedTile = null;
-		selectedTileCoords = new Godot.Vector2I(0,0);
+		buyableCell = null;
+		buyableCellCoords = new Godot.Vector2I(0,0);
 		GetNode<Label>("HUD/Buy").Visible = false;
 	}
 
